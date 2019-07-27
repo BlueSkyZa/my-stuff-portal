@@ -1,0 +1,26 @@
+<div class="container">
+  <br>
+  <div class="row justify-content-center" >
+    <div class="col-xs-10 col-sm-8 col-md-6">
+      <H2>{{ 'LOGIN.title' | translate }}</H2>
+
+      <form [formGroup]="loginForm" (submit)="onLogin()">
+        <mat-form-field class="form-group">
+          <input matInput type="text" formControlName="username" id="username" placeholder="{{ 'USER.username' | translate }}" appAutoFocus>
+        </mat-form-field>
+
+        <mat-form-field class="form-group">
+          <input matInput type="password" formControlName="password" id="password" placeholder="{{ 'USER.password' | translate }}">
+        </mat-form-field>
+
+        <div style="width: 100%; text-align: right;">
+          <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">{{ 'BUTTON.login' | translate }}</button>&nbsp;
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>

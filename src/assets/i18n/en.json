@@ -1,0 +1,32 @@
+{
+  "BUTTON": {
+    "login": "Login"
+  },
+  "HOME": {
+    "welcome": "Welcome to My Stuff",
+    "title": "Well now its your stuff",
+    "text-1": "You know what I mean, just click the Stuff button",
+    "text-2": "Or click the User button and add some users"
+  },
+  "LOGIN": {
+    "title": "Login to My Stuff"
+  },
+  "NAVIGATION" : {
+    "home": "Home",
+    "logout": "Logout",
+    "login": "Login",
+    "stuff": "Stuff",
+    "users": "Users"
+  },
+  "STUFF": {
+    "title": "Here is all the Stuff",
+    "text-1": "Click the + button and start adding stuff"
+
+  },
+  "USER" : {
+    "title": "Add some users",
+    "text-1": "Then they can have Stuff too",
+    "username": "Username",
+    "password": "Password"
+  }
+}
