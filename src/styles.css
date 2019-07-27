@@ -1,1 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+.toolbar-push-right {
+  flex: 1 1 auto;
+}
+
+
+.mat-icon.toolbar-logo {
+  object-fit: cover;
+  height: 70px;
+  width: 350px;
+  background-image: url("./assets/my-stuff.jpg");
+  background-size: 100% 100%;
+  margin-left: -20px;
+  margin-right: 20px;
+}
+
+.container {
+  height: 100%
+}
+
+.form-group {
+  min-height: 3rem;
+  width: 100%;
+  min-height: 3rem;
+}
+
+button.mat-raised-button {
+  min-width: 100px;
+}
+
