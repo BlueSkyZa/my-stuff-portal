@@ -8,6 +8,7 @@ import { NotifierService } from '../../service/notifier.service';
 interface User {
   id: string;
   username: string;
+  role: string;
   password: string;
 }
 
@@ -86,7 +87,7 @@ export class UserComponent implements OnInit {
   }
 
   private add() {
-    this.dataSource.data.splice(0, 0, {id: 'NEW', username: '', password: ''});
+    this.dataSource.data.splice(0, 0, {id: 'NEW', username: '', role: 'read', password: ''});
     this.editing = 'NEW';
     this.dataSource.data = this.dataSource.data.slice(0); // force table control to update
   }

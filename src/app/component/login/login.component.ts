@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { AuthService } from '../../service/auth.service';
 import { NotifierService } from '../../service/notifier.service';
+import { IdentityService } from '../../service/identity.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,10 @@ export class LoginComponent {
   public loginForm: FormGroup;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private authService: AuthService,
-              private notifierService: NotifierService, public translate: TranslateService) {
+              private identityService: IdentityService, private notifierService: NotifierService,
+              public translate: TranslateService) {
+    identityService.clear();
+
     this.loginForm = formBuilder.group({
       username: ['', Validators.compose([Validators.maxLength(150), Validators.required])],
       password: ['', Validators.compose([Validators.maxLength(30), Validators.required])]
