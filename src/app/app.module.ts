@@ -21,6 +21,7 @@ import { IdentityService } from './service/identity.service';
 import { NotifierService } from './service/notifier.service';
 import { StuffService } from './service/stuff.service';
 import { SocketService } from './service/socket.service';
+import { UserService } from './service/user.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
@@ -85,7 +86,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     IdentityService,
     NotifierService,
     StuffService,
-    SocketService
+    SocketService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

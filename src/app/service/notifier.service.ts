@@ -20,7 +20,6 @@ export class NotifierService {
 
       if (list.length > 0) {
         this.translateService.get(list, data).subscribe(result => {
-          this.toastrService.success(result[message], result[title]);
           resolve({title: result[title] || title, message: result[message] || message});
         }, error => {
           reject(error);
@@ -33,25 +32,25 @@ export class NotifierService {
   }
 
   public success(title: string, message: string, data?: any) {
-    this.translate(title, message)
+    this.translate(title, message, data)
       .then(result => this.toastrService.success(result.message, result.title))
       .catch(error => console.error(error));
   }
 
   public error(title: string, message: string, data?: any) {
-    this.translate(title, message)
+    this.translate(title, message, data)
       .then(result => this.toastrService.error(result.message, result.title))
       .catch(error => console.error(error));
   }
 
   public warning(title: string, message: string, data?: any) {
-    this.translate(title, message)
+    this.translate(title, message, data)
       .then(result => this.toastrService.warning(result.message, result.title))
       .catch(error => console.error(error));
   }
 
   public info(title: string, message: string, data?: any) {
-    this.translate(title, message)
+    this.translate(title, message, data)
       .then(result => this.toastrService.info(result.message, result.title))
       .catch(error => console.error(error));
   }

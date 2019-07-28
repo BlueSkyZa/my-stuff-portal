@@ -1,4 +1,4 @@
 <h3>{{ 'STUFF.title' | translate }}</h3>
 <p>{{ 'STUFF.text-1' | translate }}</p>
 
-<app-tree-view [treeData]="data" (dataChange)="dataChange($event)">loading</app-tree-view>
+<app-tree-view [treeData]="data" (dataChange)="dataChange($event)" [readonly]="readonly">loading</app-tree-view>

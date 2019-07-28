@@ -26,19 +26,19 @@ export class LoginComponent {
 
   public onLogin() {
     try {
-      this.authService.authenticate(this.loginForm.value.email, this.loginForm.value.password)
+      this.authService.authenticate(this.loginForm.value.username, this.loginForm.value.password)
         .then(() => {
-          this.notifierService.success('Login Success', 'Welcome to My Stuff');
+          this.notifierService.success('NOTIFIER.login-title', 'NOTIFIER.login-sucess');
           this.router.navigate(['home']);
         })
         .catch(error => {
           console.log(error);
-          this.notifierService.error('Login Failed', error.message);
+          this.notifierService.error('NOTIFIER.login-title', error.message);
         });
     }
     catch (error) {
       console.log(error);
-      this.notifierService.error('Login Failed', error.message);
+      this.notifierService.error('NOTIFIER.login-title', error.message);
     }
   }
 }

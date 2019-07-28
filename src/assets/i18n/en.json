@@ -18,14 +18,26 @@
     "stuff": "Stuff",
     "users": "Users"
   },
+  "NOTIFIER" : {
+    "load-title": "Load Data",
+    "post-title": "Post Data",
+    "remote-update-title": "Remote Update",
+    "remote-create-title": "Remote Create",
+    "remote-delete-title": "Remote Delete",
+    "record-not-found": "Record not found",
+    "action-unrecognised": "Action unrecognised",
+    "record-created": "Record Created",
+    "record-deleted": "Record Deleted",
+    "login-title": "Login",
+    "login-sucess": "Welcome to My Stuff"
+  },
   "STUFF": {
     "title": "Here is all the Stuff",
-    "text-1": "Click the + button and start adding stuff"
-
+    "text-1": "Click the + button and start adding stuff. People will be GREEN with envy! .. or orange?"
   },
   "USER" : {
     "title": "Add some users",
-    "text-1": "Then they can play with your Stuff too",
+    "text-1": "Then they can play with your Stuff too. Click that -->",
     "username": "Username",
     "password": "Password"
   }

@@ -15,10 +15,10 @@
 
     <span class="push-right"></span>
 
-    <button mat-icon-button (click)="removeNode($event, node)" *ngIf="!editing && node.data.parentId && !node.expandable"><mat-icon>remove</mat-icon></button>
-    <button mat-button (click)="doneEditing($event, node)" *ngIf="node.editing"><mat-icon>done</mat-icon></button>
-    <button mat-icon-button (click)="editNode($event, node)" *ngIf="!editing && node.data.parentId"><mat-icon>edit</mat-icon></button>
-    <button mat-icon-button (click)="addNode($event, node)" *ngIf="!editing"><mat-icon>add</mat-icon></button>
+    <button mat-icon-button (click)="removeNode($event, node)" *ngIf="!readonly && !editing && node.data.parentId && !node.expandable"><mat-icon>remove</mat-icon></button>
+    <button mat-button (click)="doneEditing($event, node)" *ngIf="!readonly && node.editing"><mat-icon>done</mat-icon></button>
+    <button mat-icon-button (click)="editNode($event, node)" *ngIf="!readonly && !editing && node.data.parentId"><mat-icon>edit</mat-icon></button>
+    <button mat-icon-button (click)="addNode($event, node)" *ngIf="!readonly && !editing"><mat-icon>add</mat-icon></button>
 
   </mat-tree-node>
 

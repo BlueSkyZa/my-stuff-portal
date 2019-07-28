@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { StuffService } from '../../service/stuff.service';
 import { SocketService } from '../../service/socket.service';
 import { NotifierService } from '../../service/notifier.service';
+import {IdentityService} from '../../service/identity.service';
 
 @Component({
   selector: 'app-stuff',
@@ -15,10 +16,13 @@ export class StuffComponent implements OnDestroy {
 
   private subscriptions = new Subscription();
   private data: Data[];
+  private readonly: boolean;
 
-  constructor(private stuffService: StuffService, private socketService: SocketService, private notifierService: NotifierService) {
+  constructor(private stuffService: StuffService, private socketService: SocketService, private identityService: IdentityService,
+              private notifierService: NotifierService) {
     this.stuffService.get()
       .then(result => {
+        this.readonly = !identityService.role || identityService.role === 'read';
         this.data = result.data;
         this.socketService.start();
 
@@ -29,12 +33,12 @@ export class StuffComponent implements OnDestroy {
             case 'create': return this.create(event.data);
             case 'update': return this.update(event.data);
             case 'remove': return this.remove(event.data);
-            default: return Promise.reject({message: 'Action unrecognised'});
+            default: return Promise.reject({message: 'NOTIFIER.action-unrecognised'});
           }
         }));
 
       })
-      .catch(error => notifierService.error('Load Failed', error.message));
+      .catch(error => notifierService.error('NOTIFIER.load-title', error.message));
   }
 
   ngOnDestroy() {
@@ -49,7 +53,7 @@ export class StuffComponent implements OnDestroy {
         case 'create': return stuffService.post(event.data);
         case 'update': return stuffService.put(event.data);
         case 'remove': return stuffService.delete(event.data);
-        default: return Promise.reject({message: 'Action unrecognised'});
+        default: return Promise.reject({message: 'NOTIFIER.action-unrecognised'});
       }
     }
 
@@ -59,7 +63,7 @@ export class StuffComponent implements OnDestroy {
         console.log(event);
         this.socketService.send(event);
       })
-      .catch(error => this.notifierService.error('Post Failed', error.message));
+      .catch(error => this.notifierService.error('NOTIFIER.post-title', error.message, error));
   }
 
   private create(data: Data) {
@@ -69,12 +73,12 @@ export class StuffComponent implements OnDestroy {
     this.data.push(data);
     this.data = this.data.slice(); // force angular to trigger and update
 
-    this.notifierService.success('Remote Create', 'Record created: ' + data.name);
+    this.notifierService.success('NOTIFIER.remote-create-title', 'NOTIFIER.record-created', data);
   }
 
   private update(data: Data) {
     const currentData = this.data.find(item => item.id === data.id);
-    if (!currentData) return this.notifierService.warning('Remote Update Failed', 'Record not found');
+    if (!currentData) return this.notifierService.warning('NOTIFIER.remote-update-title', 'NOTIFIER.record-not-found');
 
     console.log('REMOTE UPDATE');
     console.log(data);
@@ -82,12 +86,12 @@ export class StuffComponent implements OnDestroy {
     currentData.parentId = data.parentId;
     currentData.name = data.name;
 
-    this.notifierService.success('Remote Update', 'Record updated: ' + data.name);
+    this.notifierService.success('NOTIFIER.remote-update-title', 'NOTIFIER.record-updated', data);
   }
 
   private remove(data: Data) {
     const index = this.data.findIndex(item => item.id === data.id);
-    if (index === -1) return this.notifierService.warning('Remote Delete Failed', 'Record not found');
+    if (index === -1) return this.notifierService.warning('NOTIFIER.remote-delete-title', 'NOTIFIER.record-not-found');
 
     console.log('REMOTE DELETE');
     console.log(data);
@@ -95,6 +99,6 @@ export class StuffComponent implements OnDestroy {
     this.data.splice(index, 1);
     this.data = this.data.slice(); // force angular to trigger and update
 
-    this.notifierService.success('Remote Delete', 'Record deleted: ' + data.name);
+    this.notifierService.success('NOTIFIER.remote-delete-title', 'NOTIFIER.record-deleted', name);
   }
 }

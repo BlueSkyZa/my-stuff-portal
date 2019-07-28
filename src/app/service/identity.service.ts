@@ -16,6 +16,9 @@ export class IdentityService {
   public set(user: any, token: string) {
     this.data.user = user;
     this.data.token = token;
+
+    console.log('USER');
+    console.log(this.data);
   }
 
   public authorised(route: ActivatedRouteSnapshot) {
@@ -32,10 +35,19 @@ export class IdentityService {
   }
 
   public get administrator() {
-    return !!(this.data.user && this.data.user.admin);
+    return !!(this.data.user && this.data.user.role === 'admin');
   }
 
   public get token() {
     return this.data.token;
+  }
+
+  public get role() {
+    return this.data.user && this.data.user.role;
+  }
+
+  public clear() {
+    this.data.user = null;
+    this.data.token = null;
   }
 }

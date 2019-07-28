@@ -38,7 +38,7 @@ export class TreeViewComponent {
   private data: Data[];
 
   @Output()
-    dataChange: EventEmitter<DataEvent> = new EventEmitter<DataEvent>();
+  dataChange: EventEmitter<DataEvent> = new EventEmitter<DataEvent>();
 
   @Input('treeData')
   set treeData(value: Data[]) {
@@ -59,6 +59,9 @@ export class TreeViewComponent {
       this.dataSource = null;
     }
   }
+
+  @Input()
+  readonly: boolean;
 
   constructor() {}
 
