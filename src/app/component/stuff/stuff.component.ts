@@ -15,13 +15,25 @@ export class StuffComponent {
   constructor(private stuffService: StuffService, private notifierService: NotifierService) {
     this.stuffService.get()
       .then(result => this.data = result.data)
-      .catch(error => notifierService.error('Load Failed', error));
+      .catch(error => notifierService.error('Load Failed', error.message));
   }
 
   private dataChange(event: DataEvent) {
-    // TODO: Send data to api
-    console.log('DATA CHANGED');
-    console.log(event);
+    function postData(stuffService) {
+      switch (event.action) {
+        case 'create': return stuffService.post(event.data);
+        case 'update': return stuffService.put(event.data);
+        case 'remove': return stuffService.delete(event.data);
+        default: return Promise.reject({message: 'Action unrecognised'});
+      }
+    }
+
+    postData(this.stuffService)
+      .then(() => {
+        console.log('DATA CHANGED');
+        console.log(event);
+      })
+      .catch(error => this.notifierService.error('Post Failed', error.message));
   }
 
   // TODO: subscribe to api data changes from third parties

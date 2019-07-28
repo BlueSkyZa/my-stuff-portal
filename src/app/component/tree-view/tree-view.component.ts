@@ -164,7 +164,7 @@ export class TreeViewComponent {
     this.rebuildTree();
 
     // send data change event
-    this.dataChange.next({data, action: 'new'});
+    this.dataChange.next({data, action: 'create'});
   }
 
   private removeNode(event, node) {

@@ -11,27 +11,48 @@ export class NotifierService {
 
   constructor(private toastrService: ToastrService, private translateService: TranslateService) { }
 
-  public success(title: string, message: string, data?: any) {
-    this.translateService.get([title, message], data).subscribe(result => {
-      this.toastrService.success(result[message], result[title]);
+  private translate(title: string, message: string, data?: any): Promise<{message: string; title: string}> {
+    return new Promise((resolve, reject) => {
+      const list = [];
+
+      if (title && title.indexOf('.') > 0) list.push(title);
+      if (message && message.indexOf('.') > 0) list.push(message);
+
+      if (list.length > 0) {
+        this.translateService.get(list, data).subscribe(result => {
+          this.toastrService.success(result[message], result[title]);
+          resolve({title: result[title] || title, message: result[message] || message});
+        }, error => {
+          reject(error);
+        });
+      }
+      else {
+        resolve({title, message});
+      }
     });
+  }
+
+  public success(title: string, message: string, data?: any) {
+    this.translate(title, message)
+      .then(result => this.toastrService.success(result.message, result.title))
+      .catch(error => console.error(error));
   }
 
   public error(title: string, message: string, data?: any) {
-    this.translateService.get([title, message], data).subscribe(result => {
-      this.toastrService.error(result[message], result[title]);
-    });
+    this.translate(title, message)
+      .then(result => this.toastrService.error(result.message, result.title))
+      .catch(error => console.error(error));
   }
 
   public warning(title: string, message: string, data?: any) {
-    this.translateService.get([title, message], data).subscribe(result => {
-      this.toastrService.warning(result[message], result[title]);
-    });
+    this.translate(title, message)
+      .then(result => this.toastrService.warning(result.message, result.title))
+      .catch(error => console.error(error));
   }
 
   public info(title: string, message: string, data?: any) {
-    this.translateService.get([title, message], data).subscribe(result => {
-      this.toastrService.info(result[message], result[title]);
-    });
+    this.translate(title, message)
+      .then(result => this.toastrService.info(result.message, result.title))
+      .catch(error => console.error(error));
   }
 }

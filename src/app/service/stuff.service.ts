@@ -12,4 +12,16 @@ export class StuffService {
   public get() {
     return this.httpService.get(environment.api_url + 'stuff');
   }
+
+  public post(data) {
+    return this.httpService.post(environment.api_url + 'stuff', data);
+  }
+
+  public put(data) {
+    return this.httpService.put(environment.api_url + 'stuff/' + data.id, data);
+  }
+
+  public delete(data) {
+    return this.httpService.delete(environment.api_url + 'stuff/' + data.id, data);
+  }
 }
