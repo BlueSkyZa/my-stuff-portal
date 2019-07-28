@@ -17,19 +17,19 @@ export class NotifierService {
     });
   }
 
-  public error(title: string, message: string, translate?: boolean, data?: any) {
+  public error(title: string, message: string, data?: any) {
     this.translateService.get([title, message], data).subscribe(result => {
       this.toastrService.error(result[message], result[title]);
     });
   }
 
-  public warning(title: string, message: string, translate?: boolean, data?: any) {
+  public warning(title: string, message: string, data?: any) {
     this.translateService.get([title, message], data).subscribe(result => {
       this.toastrService.warning(result[message], result[title]);
     });
   }
 
-  public info(title: string, message: string, translate?: boolean, data?: any) {
+  public info(title: string, message: string, data?: any) {
     this.translateService.get([title, message], data).subscribe(result => {
       this.toastrService.info(result[message], result[title]);
     });

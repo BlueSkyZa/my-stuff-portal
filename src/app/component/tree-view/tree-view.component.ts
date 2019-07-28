@@ -27,8 +27,9 @@ interface Node {
   styleUrls: ['tree-view.component.scss'],
 })
 export class TreeViewComponent {
-  private treeControl: FlatTreeControl<Node>;
-  private treeFlattener: MatTreeFlattener<Data, Node>;
+  private treeControl = new FlatTreeControl<Node>(node => node.level, node => node.expandable);
+  private treeFlattener = new MatTreeFlattener<Data, Node>(this.transformer.bind(this), this.getLevel, this.isExpandable,
+    this.getChildren.bind(this));
   private dataSource: MatTreeFlatDataSource<Data, Node>;
 
   private editing: boolean;
@@ -41,11 +42,16 @@ export class TreeViewComponent {
 
   @Input('treeData')
   set treeData(value: Data[]) {
-    this.data = value;
-    this.treeControl = new FlatTreeControl<Node>(node => node.level, node => node.expandable);
-    this.treeFlattener = new MatTreeFlattener(this.transformer.bind(this), this.getLevel, this.isExpandable, this.getChildren.bind(this));
-    this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-    this.dataSource.data = this.data.filter(item => !item.parentId);
+    if (value) {
+      this.data = value;
+
+      this.dataSource = new MatTreeFlatDataSource<Data, Node>(this.treeControl, this.treeFlattener);
+      this.dataSource.data = this.data.filter(item => !item.parentId);
+    }
+    else {
+      this.data = null;
+      this.dataSource = null;
+    }
   }
 
   constructor() {}
