@@ -28,6 +28,8 @@ import { UserComponent } from './component/user/user.component';
 import { BusyComponent } from './component/busy/busy.component';
 import { HeaderComponent } from './component/header/header.component';
 import { HomeComponent } from './component/home/home.component';
+import { TreeViewComponent } from './component/tree-view/tree-view.component';
+import { AutoFocusDirective } from './directive/auto-focus.directive';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -41,7 +43,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserComponent,
     BusyComponent,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    TreeViewComponent,
+    AutoFocusDirective
   ],
   imports: [
     HttpClientModule,

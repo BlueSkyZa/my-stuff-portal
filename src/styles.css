@@ -1,6 +1,6 @@
-@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
-.toolbar-push-right {
+.push-right {
   flex: 1 1 auto;
 }
 
@@ -22,10 +22,60 @@
 .form-group {
   min-height: 3rem;
   width: 100%;
-  min-height: 3rem;
 }
 
 button.mat-raised-button {
   min-width: 100px;
+}
+
+.mat-tree-node {
+  background-color: white;
+  user-select: none;
+  cursor: move;
+}
+
+/* while dragging */
+.cdk-drag-preview {
+  @include mat-elevation(12);
+}
+
+/* potential drop area */
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+/* items moving away to make room for drop */
+.cdk-drop-list-dragging .mat-tree-node:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+/* item being dropped */
+.cdk-drag-animating {
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.mat-tree-node {
+  background-color: rgb(66, 157, 253);
+  color: white;
+  user-select: none;
+  cursor: move;
+}
+
+/* while dragging */
+.mat-tree-node.cdk-drag-preview {
+  @include mat-elevation(12);
+}
+
+/* potential drop area */
+.mat-tree-node.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+/* items moving away to make room for drop */
+.cdk-drop-list-dragging .mat-tree-node:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+/* item being dropped */
+.cdk-drag-animating {
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
 }
 

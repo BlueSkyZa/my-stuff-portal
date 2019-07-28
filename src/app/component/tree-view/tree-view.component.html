@@ -1,0 +1,25 @@
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl" cdkDropList (cdkDropListDropped)="drop($event)">
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding cdkDrag [cdkDragData]="node">
+    <button mat-icon-button disabled *ngIf="!node.expandable"></button>
+
+    <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.filename" *ngIf="node.expandable">
+      <mat-icon class="mat-icon-rtl-mirror">
+        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+      </mat-icon>
+    </button>
+
+    <span *ngIf="!node.editing">{{node.data.name}}</span>
+    <mat-form-field *ngIf="node.editing">
+      <input matInput [(ngModel)]="node.data.name" (keyup.enter)="doneEditing($event, node)" appAutoFocus>
+    </mat-form-field>
+
+    <span class="push-right"></span>
+
+    <button mat-icon-button (click)="removeNode($event, node)" *ngIf="!editing && node.data.parentId && !node.expandable"><mat-icon>remove</mat-icon></button>
+    <button mat-button (click)="doneEditing($event, node)" *ngIf="node.editing"><mat-icon>done</mat-icon></button>
+    <button mat-icon-button (click)="editNode($event, node)" *ngIf="!editing && node.data.parentId"><mat-icon>edit</mat-icon></button>
+    <button mat-icon-button (click)="addNode($event, node)" *ngIf="!editing"><mat-icon>add</mat-icon></button>
+
+  </mat-tree-node>
+
+</mat-tree>

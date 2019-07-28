@@ -6,7 +6,7 @@
     <button mat-button [routerLinkActive]="['active']" [routerLink]="['stuff']" *ngIf="identity.authenticated">{{ 'NAVIGATION.stuff' | translate }}</button>
     <button mat-button [routerLinkActive]="['active']" [routerLink]="['user']" *ngIf="identity.administrator">{{ 'NAVIGATION.users' | translate }}</button>
 
-    <span class="toolbar-push-right"></span>
+    <span class="push-right"></span>
 
     <button mat-button [routerLinkActive]="['active']" [routerLink]="['login']" *ngIf="identity.authenticated">{{ 'NAVIGATION.logout' | translate }}</button>
 
