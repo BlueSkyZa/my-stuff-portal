@@ -43,10 +43,16 @@ export class TreeViewComponent {
   @Input('treeData')
   set treeData(value: Data[]) {
     if (value) {
+      const
+        rebuild = !!this.data,
+        expanded = rebuild ?  this.getExpanded() : null;
+
       this.data = value;
 
       this.dataSource = new MatTreeFlatDataSource<Data, Node>(this.treeControl, this.treeFlattener);
       this.dataSource.data = this.data.filter(item => !item.parentId);
+
+      if (rebuild) this.rebuildTree(expanded);
     }
     else {
       this.data = null;
@@ -145,26 +151,20 @@ export class TreeViewComponent {
     this.dataChange.next({data: nodeToInsert.data, action: 'update'});
   }
 
-  private addNode(event, node) {
+  private addNode(event, parent) {
     event.stopPropagation();
 
-    console.log('ADDING TO NODE');
-    console.log(node);
+    console.log('ADDING NEW NODE TO');
+    console.log(parent);
 
     // add new data item
-    const data = {id: this.newId(), parentId: node.data.id, name: ''};
+    const data = {id: 'NEW', parentId: parent.data.id, name: ''};
     this.data.push(data);
-    node.expandable = true;
-    this.treeControl.expand(node);
-
-    console.log('NEW DATA');
-    console.log(data);
+    parent.expandable = true;
+    this.treeControl.expand(parent);
 
     // rebuild the tree to update its display
     this.rebuildTree();
-
-    // send data change event
-    this.dataChange.next({data, action: 'create'});
   }
 
   private removeNode(event, node) {
@@ -203,7 +203,11 @@ export class TreeViewComponent {
     console.log('DONE EDITING');
 
     // send data change event
-    if (this.savedName !== node.data.name)
+    if (node.data.id === 'NEW') {
+      node.data.id = this.newId();
+      this.dataChange.next({data: node.data, action: 'create'});
+    }
+    else if (this.savedName !== node.data.name)
       this.dataChange.next({data: node.data, action: 'update'});
   }
 }
