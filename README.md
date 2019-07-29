@@ -2,6 +2,14 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.1.
 
+Took my most of the weekend and a bit on Monday morning to get this far.
+
+I didnt get to writing unit tests unfortunately. First time trying out the Material Design Tree component, which I think is pretty cool, however it took quite a bit more time than I anticipated to get it working the way I wanted.
+
+To make this a real project, it needs a database and while the tree looks cool it isn't designed to handle more than a couple of hundred items at most, so if big data is needed something else would have to be used there.
+
+There are two projects, this one, My Stuff Portal, which is a pure Angular 8 website and My Stuff API which is a pure node service used by this website for data services.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
