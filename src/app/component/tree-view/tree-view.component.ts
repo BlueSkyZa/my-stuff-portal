@@ -115,8 +115,8 @@ export class TreeViewComponent {
       const node = expanded.find(item => item.data.id === data.id);
       if (!node || !node.expandable) return;
       const children = this.data.filter(item => item.parentId === node.data.id);
-      children.forEach(child => addExpandedChildren(child));
-    });
+      children.forEach(child => addExpandedChildren.call(this, child));
+    }.bind(this));
 
     return result.map(item => this.treeControl.dataNodes.find(node => node.data.id === item.id));
   }
@@ -133,6 +133,9 @@ export class TreeViewComponent {
   }
 
   private drop(event: CdkDragDrop<string[]>) {
+    // check readonly
+    if (this.readonly) return this.rebuildTree();
+
     // visible nodes based on what is expanded
     const expanded = this.getExpanded();
     const visible = this.getVisible(expanded);
