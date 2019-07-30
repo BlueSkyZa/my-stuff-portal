@@ -99,6 +99,6 @@ export class StuffComponent implements OnDestroy {
     this.data.splice(index, 1);
     this.data = this.data.slice(); // force angular to trigger and update
 
-    this.notifierService.success('NOTIFIER.remote-delete-title', 'NOTIFIER.record-deleted', name);
+    this.notifierService.success('NOTIFIER.remote-delete-title', 'NOTIFIER.record-deleted', data);
   }
 }

@@ -24,12 +24,14 @@
     "remote-update-title": "Remote Update",
     "remote-create-title": "Remote Create",
     "remote-delete-title": "Remote Delete",
+    "remote-update-title": "Remote Update",
     "record-not-found": "Record not found",
     "action-unrecognised": "Action unrecognised",
-    "record-created": "Record Created",
-    "record-deleted": "Record Deleted",
+    "record-created": "Record Created - {{name}}",
+    "record-deleted": "Record Deleted - {{name}}",
+    "record-updated": "Record Updated - {{name}}",
     "login-title": "Login",
-    "login-sucess": "Welcome to My Stuff"
+    "login-success": "Welcome to My Stuff"
   },
   "STUFF": {
     "title": "Here is all the Stuff",

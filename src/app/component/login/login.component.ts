@@ -32,7 +32,7 @@ export class LoginComponent {
     try {
       this.authService.authenticate(this.loginForm.value.username, this.loginForm.value.password)
         .then(() => {
-          this.notifierService.success('NOTIFIER.login-title', 'NOTIFIER.login-sucess');
+          this.notifierService.success('NOTIFIER.login-title', 'NOTIFIER.login-success');
           this.router.navigate(['home']);
         })
         .catch(error => {
